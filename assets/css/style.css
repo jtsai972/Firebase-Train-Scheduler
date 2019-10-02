@@ -79,6 +79,7 @@ form {
         flex-flow: column;
 }
     input {
+        border: 1px solid #BDB8AD;
         margin-bottom: 1.5em;
         margin-top: 0.5em;
         padding: 0.5em 1em;
