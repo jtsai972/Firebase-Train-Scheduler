@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <!-- Fonts -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+    <!--Title -->
+    <title>Firebase Train Scheduler</title>
+</head>
+<body>
+    <header>
+        <h1>Firebase Train Scheduler</h1>
+    </header>
+
+    <main>
+        <section id="schedule">
+            <h2>Current Train Schedule</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                        <!-- <th>Options</th> -->
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section id="add-train">
+            <h2>Add Train</h2>
+            <form>
+                <label for="train">Train Name</label>
+                <input type="text" id="train" name="trainName" value="">
+
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" name="trainDestination" value="">
+
+                <label for="time">First Train Time (HH:mm - military time)</label>
+                <input type="text" id="time" name="trainTime" value="">
+
+                <label for="frequency">Frequency (min)</label>
+                <input type="number" id="frequency" name="trainFrequency" value="">
+
+                <button>submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Jasmine Tsai</p>
+        <p>Powered by <a href="https://firebase.google.com/" aria-label="External link to Firebase" rel="noopener noreferrer">Firebase</a>, <a href="https://momentjs.com/" aria-label="External link to Moment.js" rel="noopener noreferrer">Moment.js</a> and <a href="https://jquery.com/" aria-label="External link to jQuery" rel="noopener noreferrer">jQuery</a></p>
+        <p>Hosted on <a href="https://github.com/" aria-label="Check out Github's homepage" rel="noopener noreferrer">Github</a></p>
+    </footer>
+
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+</html>
