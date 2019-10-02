@@ -60,18 +60,19 @@ section {
 }
 
 table, form {
-    border-collapse: unset;
     padding: 1em;
     width: 100%;
 }
     tbody tr {
         border-top: 1px solid #BDB8AD;
     }
-    th {
-        font-weight: bold;
-    }
     th, td {
         padding: 0.5em 1em;
+        text-align: center;
+    }
+    th {
+        font-weight: bold;
+        padding: 1em;
     }
 
 form {
