@@ -64,13 +64,16 @@ table, form {
     padding: 1em;
     width: 100%;
 }
-    tbody tr {
-        border-top: 1px solid #BDB8AD;
+    table {
+        text-align: center;
     }
     th {
         font-weight: bold;
+        padding: 1em;
+            padding-top: 0;
     }
-    th, td {
+    td {
+        border-top: 1px solid #BDB8AD;
         padding: 0.5em 1em;
     }
 
