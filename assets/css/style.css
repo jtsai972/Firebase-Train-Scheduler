@@ -60,7 +60,6 @@ section {
 }
 
 table, form {
-    border-collapse: unset;
     padding: 1em;
     width: 100%;
 }
@@ -74,8 +73,6 @@ table, form {
     }
     td {
         border-top: 1px solid #BDB8AD;
-        padding: 0.5em 1em;
-    }
 
 form {
     display: flex;
