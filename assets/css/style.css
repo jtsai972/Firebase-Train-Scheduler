@@ -64,16 +64,20 @@ table, form {
     width: 100%;
 }
     table {
+        border-collapse: unset;
         text-align: center;
     }
     th {
+        background: #eee;
         font-weight: bold;
         padding: 1em;
-            padding-top: 0;
     }
     td {
+        background: #eee;
         border-top: 1px solid #BDB8AD;
+        padding: 0.5em 1em;
     }
+
 form {
     display: flex;
         flex-flow: column;

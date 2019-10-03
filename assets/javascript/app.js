@@ -25,7 +25,7 @@ var minuteTimer, isTimed = false;
  * ================================================= */
 // When something is added to the child
 database.ref("/trainData").on("child_added", function(childSnapshot) {
-    console.log(childSnapshot.val());
+    //console.log(childSnapshot.val());
     
     trainName = childSnapshot.val().trainName;
     destination = childSnapshot.val().destination;
@@ -34,7 +34,7 @@ database.ref("/trainData").on("child_added", function(childSnapshot) {
     minutesAway = childSnapshot.val().minutesAway;
     nextArrival = childSnapshot.val().nextArrival;
 
-    console.log(childSnapshot.val().destination);
+    //console.log(childSnapshot.val().destination);
     
     printRow();
     timer();//start timer
@@ -50,11 +50,9 @@ database.ref("/trainData").on("value", function(snapshot){
         snapshot.val().minutesAway = rowName.find(".minAway").text();
         
         rowNum++; //incrementing each loop
-        console.log(rowNum);
+        // console.log(rowNum);
     });
 });
-
-
 
 /* ================================================
  * Document events
@@ -69,8 +67,8 @@ $("form button").on("click", function(){
     startTime = $("#time").val().trim();
     frequency = parseInt($("#frequency").val().trim());
 
-    console.log("Start time: " + startTime);
-    console.log("Frequency: " + frequency);
+    // console.log("Start time: " + startTime);
+    // console.log("Frequency: " + frequency);
     
     //setting up some functions to calculate and print results
     calculateTime();
@@ -102,22 +100,23 @@ function calculateTime() {
     //Moment.js stuff
     //getting the start time and setting it to a moment object
     startTimeConverted = moment(startTime, "HH:mm");
-    console.log("Converted start time: " + startTimeConverted);
+    //console.log("Converted start time: " + startTimeConverted);
 
     //current time minus startTime
     timeDifference = moment().diff(startTimeConverted, "minutes");
-    console.log("Minutes since train started: " + timeDifference);
+    //console.log("Minutes since train started: " + timeDifference);
 
     //how many minutes left before the next train
     minutesAway = timeDifference % frequency;
-    console.log("Minutes until next train: " + minutesAway);
+    //console.log("Minutes until next train: " + minutesAway);
 
     //Time for next arrival of the train
     nextArrival = moment().add(minutesAway, "minutes").format("HH:mm");
-    console.log("Train will next arrive at: " + nextArrival);
+    //console.log("Train will next arrive at: " + nextArrival);
 }
 
 function printRow() {
+    //console.log("printing");
     var tRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
@@ -135,12 +134,12 @@ function timer() {
         console.log("timer is on");
 
         //subtracting minutes from minutesAway
-        $(".minutesAway").each( function() {
+        $(".minAway").each( function() {
             var textMin = $(this).text();
             var freq = $(this).parent().find(".frequency").text();
 
-            //console.log("Minutes left: " + textMin);
-            //console.log("Frequency text: " + freq);
+            // console.log("Minutes left: " + textMin);
+            // console.log("Frequency text: " + freq);
 
             textMin--;
 
@@ -161,13 +160,17 @@ function timer() {
             } else {
                 $(this).text(textMin);
             };
+
+            //console.log(textMin);
+
         });
 
-    }, (6 * 1000));
+
+    }, (60 * 1000));
 }
 
 //clear interval on page close
-$(document).on('close', '[data-reveal]', function () {
+$(window).on("unload", function () {
     isTimed = false;
     clearInterval(minuteTimer);
 });
