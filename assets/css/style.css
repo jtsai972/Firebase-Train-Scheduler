@@ -69,11 +69,12 @@ table, form {
     th {
         font-weight: bold;
         padding: 1em;
-            padding-top: 0;
     }
     td {
         border-top: 1px solid #BDB8AD;
+        padding: 0.5em 1em;
     }
+
 form {
     display: flex;
         flex-flow: column;

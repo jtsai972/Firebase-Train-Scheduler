@@ -54,8 +54,6 @@ database.ref("/trainData").on("value", function(snapshot){
     });
 });
 
-
-
 /* ================================================
  * Document events
  * ================================================= */
@@ -118,6 +116,7 @@ function calculateTime() {
 }
 
 function printRow() {
+    console.log("printing");
     var tRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
@@ -135,12 +134,12 @@ function timer() {
         console.log("timer is on");
 
         //subtracting minutes from minutesAway
-        $(".minutesAway").each( function() {
+        $(".minAway").each( function() {
             var textMin = $(this).text();
             var freq = $(this).parent().find(".frequency").text();
 
-            //console.log("Minutes left: " + textMin);
-            //console.log("Frequency text: " + freq);
+            console.log("Minutes left: " + textMin);
+            console.log("Frequency text: " + freq);
 
             textMin--;
 
@@ -161,7 +160,11 @@ function timer() {
             } else {
                 $(this).text(textMin);
             };
+
+            console.log(textMin);
+
         });
+
 
     }, (6 * 1000));
 }
