@@ -73,7 +73,7 @@ table, form {
     }
     td {
         border-top: 1px solid #BDB8AD;
-
+    }
 form {
     display: flex;
         flex-flow: column;

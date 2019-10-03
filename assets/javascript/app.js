@@ -171,19 +171,3 @@ $(document).on('close', '[data-reveal]', function () {
     isTimed = false;
     clearInterval(minuteTimer);
 });
-
-/* Thoughts
-    console.log($(this));
-
-    var text = $(this).text();
-    console.log("Text: " + text);
-
-    var time = moment(text, "HH:mm");
-    console.log("Time: " + time);
-
-    $(this).text((time.subtract(1, "minutes")).format("HH:mm"));
-
-    if($(this).text() === "0") {
-        $(this).text($(this).parent().find(".frequency")) ;
-    }
-            */
