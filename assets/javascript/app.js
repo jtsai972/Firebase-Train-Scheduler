@@ -1,3 +1,18 @@
+//Database
+var config = {
+    apiKey: "AIzaSyCGLo6YNDxMpesuapo0S00z9B5Na7x5Qvg",
+    authDomain: "fir-project-25203.firebaseapp.com",
+    databaseURL: "https://fir-project-25203.firebaseio.com",
+    projectId: "fir-project-25203",
+    storageBucket: "fir-project-25203.appspot.com",
+    messagingSenderId: "683229760472",
+    appId: "1:683229760472:web:4ff3016f898a5345c0c0ad",
+    measurementId: "G-9PJ6STEY6C"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
 //Info pulled from form
 var trainName, destination, frequency, startTime;
 //values calculated in calculateTime function
@@ -5,9 +20,45 @@ var startTimeConverted, timeDifference, minutesAway, nextArrival;
 //timer to update site every minute
 var minuteTimer, isTimed = false;
 
+/* ================================================
+ * Database content
+ * ================================================= */
+// When something is added to the child
+database.ref("/trainData").on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
+    
+    trainName = childSnapshot.val().trainName;
+    destination = childSnapshot.val().destination;
+    frequency = childSnapshot.val().frequency;
+    startTime = childSnapshot.val().startTime;
+    minutesAway = childSnapshot.val().minutesAway;
+    nextArrival = childSnapshot.val().nextArrival;
+
+    console.log(childSnapshot.val().destination);
+    
+    printRow();
+    timer();//start timer
+});
+//changes the data with the element
+database.ref("/trainData").on("value", function(snapshot){
+    let rowNum = 0;
+    snapshot.forEach(function(data){
+        //getting the tr in the tbody
+        var rowName = $($("tbody tr")[rowNum]);
+
+        snapshot.val().nextArrival = rowName.find("nextTime").text();
+        snapshot.val().minutesAway = rowName.find(".minAway").text();
+        
+        rowNum++; //incrementing each loop
+        console.log(rowNum);
+    });
+});
 
 
 
+/* ================================================
+ * Document events
+ * ================================================= */
 $("form button").on("click", function(){
     //preventing button from refreshing page
     event.preventDefault();
@@ -16,22 +67,35 @@ $("form button").on("click", function(){
     trainName = $("#train").val().trim();
     destination = $("#destination").val().trim();
     startTime = $("#time").val().trim();
-    frequency = $("#frequency").val().trim();
+    frequency = parseInt($("#frequency").val().trim());
 
     console.log("Start time: " + startTime);
     console.log("Frequency: " + frequency);
     
     //setting up some functions to calculate and print results
     calculateTime();
-    printRow();
+
+    var newTrain = {
+        trainName: trainName,
+        destination: destination,
+        startTime: startTime,
+        frequency: frequency,
+        nextArrival: nextArrival,
+        minutesAway: minutesAway
+    }
+    //adding new train item to trainData
+    database.ref("/trainData").push(newTrain);
 
     $("form").trigger("reset");
 
-    if(isTimed === false) {
-        timer()
-    }
+    //making sure the timer is only called once
+    if(isTimed === false) { timer() };
     isTimed = true;
 });
+
+/* ================================================
+ * Functions
+ * ================================================= */
 
 //calculate time stuff
 function calculateTime() {
@@ -66,10 +130,12 @@ function printRow() {
 }
 
 function timer() {
+    clearInterval(minuteTimer);
     minuteTimer = setInterval( function(){
+        console.log("timer is on");
 
         //subtracting minutes from minutesAway
-        $(".minAway").each( function() {
+        $(".minutesAway").each( function() {
             var textMin = $(this).text();
             var freq = $(this).parent().find(".frequency").text();
 
@@ -97,8 +163,14 @@ function timer() {
             };
         });
 
-    }, (60 * 1000));
+    }, (6 * 1000));
 }
+
+//clear interval on page close
+$(document).on('close', '[data-reveal]', function () {
+    isTimed = false;
+    clearInterval(minuteTimer);
+});
 
 /* Thoughts
     console.log($(this));
