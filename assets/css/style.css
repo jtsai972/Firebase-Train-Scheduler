@@ -63,17 +63,16 @@ table, form {
     padding: 1em;
     width: 100%;
 }
-    tbody tr {
-        border-top: 1px solid #BDB8AD;
-    }
-    th, td {
-        padding: 0.5em 1em;
+    table {
         text-align: center;
     }
     th {
         font-weight: bold;
         padding: 1em;
+            padding-top: 0;
     }
+    td {
+        border-top: 1px solid #BDB8AD;
 
 form {
     display: flex;
